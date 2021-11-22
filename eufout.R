@@ -18,5 +18,7 @@ eufout <- function(x, file.name = "Rout.euf") {
                       Pl = "<Plusz>",
                       x[,8])
     asc.out <- sub("\\.", ",", full.mat)
-    write(t(asc.out), file.name)
+    vec.out <- as.vector(t(asc.out))
+    vec.out <- vec.out[-(8:17)]
+    write(vec.out, file.name)
 }
