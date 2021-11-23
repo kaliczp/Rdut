@@ -15,8 +15,12 @@ clean.fold <- function(c.id, vol) {
     c.id.only <- c.id.nospace[grep("\\+", c.id.nospace)]
     c.id.noplus <- sub("\\+", "", c.id.only)
     c.id.ok <- as.numeric(sub(",", ".", c.id.noplus))
-    vol.ok <- matrix(vol, ncol =2, byrow = TRUE)
-    vol.table <- data.frame(id = c.id.ok, T = vol.ok[,1], B = vol.ok[,2])
+    vol.clean <- sub("[BT]: ","", vol)
+    vol.num <- as.numeric(sub(",",".",vol.clean))
+    vol.ok <- matrix(vol.num, ncol =2, byrow = TRUE)
+    T.clean <- vol.ok[,1]
+    B.clean <- vol.ok[,2]
+    vol.table <- data.frame(id = c.id.ok, T = T.clean, B = B.clean)
     vol.table[order(vol.table[,"id"]),]
 }
 
