@@ -24,4 +24,5 @@ clean.fold <- function(c.id, vol) {
     vol.table[order(vol.table[,"id"]),]
 }
 
-clean.fold(szelv, btjav)
+write.table(clean.fold(szelv, btjav), "table.txt", sep = "\t", quote=F, row.names = F, dec=",")
+
