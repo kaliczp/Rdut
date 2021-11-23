@@ -9,4 +9,8 @@ eufout(test)
 szelv <- scan("szelv.txt", character(), sep = "\n")
 btjav <- scan("btjav.txt", character(), sep = "\n")
 
-cbind(szelv, matrix(btjav, ncol =2, byrow = TRUE))
+szelv.proc <- unlist(strsplit(szelv, " "))
+szelv.proc <- szelv.proc[!(szelv.proc == "")]
+szelv.ok <- szelv.proc[grep("\\+", szelv.proc)]
+
+cbind(szelv.ok, matrix(btjav, ncol =2, byrow = TRUE))
