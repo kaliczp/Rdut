@@ -12,10 +12,12 @@ btjav <- scan("btjav.txt", character(), sep = "\n")
 clean.fold <- function(c.id, vol) {
     c.id.split <- unlist(strsplit(c.id, " "))
     c.id.nospace <- c.id.split[!(c.id.split == "")]
-    c.id.ok <- c.id.nospace[grep("\\+", c.id.nospace)]
+    c.id.only <- c.id.nospace[grep("\\+", c.id.nospace)]
+    c.id.noplus <- sub("\\+", "", c.id.only)
+    c.id.ok <- as.numeric(sub(",", ".", c.id.noplus))
     vol.ok <- matrix(vol, ncol =2, byrow = TRUE)
-    vol.table <- cbind(c.id.ok, vol.ok)
-    vol.table[order(vol.table[,"c.id.ok"]),]
+    vol.table <- data.frame(id = c.id.ok, T = vol.ok[,1], B = vol.ok[,2])
+    vol.table[order(vol.table[,"id"]),]
 }
 
 clean.fold(szelv, btjav)
