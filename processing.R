@@ -9,8 +9,13 @@ eufout(test)
 szelv <- scan("szelv.txt", character(), sep = "\n")
 btjav <- scan("btjav.txt", character(), sep = "\n")
 
-szelv.proc <- unlist(strsplit(szelv, " "))
-szelv.proc <- szelv.proc[!(szelv.proc == "")]
-szelv.ok <- szelv.proc[grep("\\+", szelv.proc)]
+clean.fold <- function(c.id, vol) {
+    c.id.split <- unlist(strsplit(c.id, " "))
+    c.id.nospace <- c.id.split[!(c.id.split == "")]
+    c.id.ok <- c.id.nospace[grep("\\+", c.id.nospace)]
+    vol.ok <- matrix(vol, ncol =2, byrow = TRUE)
+    vol.table <- cbind(c.id.ok, vol.ok)
+    vol.table[order(vol.table[,"c.id.ok"]),]
+}
 
-cbind(szelv.ok, matrix(btjav, ncol =2, byrow = TRUE))
+clean.fold(szelv, btjav)
