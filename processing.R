@@ -26,3 +26,7 @@ clean.fold <- function(c.id, vol) {
 
 write.table(clean.fold(szelv, btjav), "table.txt", sep = "\t", quote=F, row.names = F, dec=",")
 
+ok <- read.table("tablejo.csv", sep="\t", head = TRUE)
+okfull <- cbind(ok[,1:3],0,0,0,0,0)
+colnames(okfull) <- colnames(test)
+eufout(okfull)
